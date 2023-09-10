@@ -4,34 +4,32 @@ from docx import Document
 import os
 
 app = Flask(__name__)
-UPLOAD_FOLDER = '/mnt/data'
 ALLOWED_EXTENSIONS = {'docx'}
-
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/upload', methods=['POST'])
+@app.route('/api/upload', methods=['POST'])
 def upload_file():
+    print("Received request for /api/upload")
+
     # Check if the post request has the file part
     if 'file' not in request.files:
+        print("Error: No file part in the request")
         return jsonify({'error': 'No file part in the request'}), 400
     file = request.files['file']
 
     # If the user does not select a file, the browser submits an empty file without a filename.
     if file.filename == '':
+        print("Error: No selected file")
         return jsonify({'error': 'No selected file'}), 400
 
     if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(file_path)
-
-        # Load the Word document
-        doc = Document(file_path)
+        # Load the Word document from uploaded file content
+        doc = Document(file.stream)
 
         # Convert the Word document to Markdown
+        print("Converting the Word document to Markdown")
         md_content = []
         for paragraph in doc.paragraphs:
             # Convert headings
@@ -41,13 +39,11 @@ def upload_file():
             else:
                 md_content.append(paragraph.text)
 
-        # Save the markdown content to a .md file
-        md_path = os.path.splitext(file_path)[0] + ".md"
-        with open(md_path, 'w') as md_file:
-            md_file.write('\n\n'.join(md_content))
+        # Join the markdown content to form the final markdown string
+        md_string = '\n\n'.join(md_content)
+        return jsonify({'message': 'File successfully converted', 'md_content': md_string}), 200
 
-        return jsonify({'message': 'File successfully converted', 'md_file_path': md_path}), 200
-
+    print("Error: Invalid file type")
     return jsonify({'error': 'Invalid file type'}), 400
 
 if __name__ == '__main__':
