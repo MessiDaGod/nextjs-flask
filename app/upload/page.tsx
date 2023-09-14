@@ -1,13 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import mammoth from "mammoth";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 export default function WordToMd() {
   const [file, setFile] = useState<File | null>(null);
   const [docxHtml, setDocxHtml] = useState<string | null>(null);
-
-  const router = useRouter();
   const searchParams = useSearchParams();
   const type = searchParams?.get("type");
 
@@ -15,6 +13,7 @@ export default function WordToMd() {
     const files = e.target.files;
     if (files && files.length > 0) {
       setFile(files[0]);
+      console.log(files[0])
     }
   };
 
