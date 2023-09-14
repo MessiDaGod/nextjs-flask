@@ -29,7 +29,7 @@ export default function WordToMd() {
 
     for (let i = 1; i <= numPages; i++) {
       const page = await pdf.getPage(i);
-      const scale = 1.5; // adjust as needed
+      const scale = 1.5;
       const viewport = page.getViewport({scale});
 
       const canvas = document.createElement('canvas');
