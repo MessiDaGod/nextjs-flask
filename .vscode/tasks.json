@@ -9,6 +9,24 @@
         "problemMatcher": [
           "$tsc-watch"
         ]
+      },
+      {
+        "label": "startService",
+        "type": "shell",
+        "command": "your-command-to-start-the-service",
+        "isBackground": true,
+        "problemMatcher": {
+          "owner": "custom",
+          "pattern": {
+            "regexp": "^(.*)$",
+            "file": 1
+          },
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".*",
+            "endsPattern": "Your service is running message or similar"
+          }
+        }
       }
     ]
   }
