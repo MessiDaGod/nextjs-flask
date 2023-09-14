@@ -13,20 +13,16 @@ def allowed_file(filename, allowed_extensions):
 
 @app.route('/api/upload', methods=['POST'])
 def upload_file():
-    print("Received request for /api/upload/docx")
-
     if 'file' not in request.files:
-        print("Error: No file part in the request")
         return jsonify({'error': 'No file part in the request'}), 400
-    file = request.files['file']
 
+    file = request.files['file']
     if file.filename == '':
-        print("Error: No selected file")
         return jsonify({'error': 'No selected file'}), 400
 
+    # Handle DOCX
     if file and allowed_file(file.filename, {'docx'}):
         doc = Document(file.stream)
-        print("Converting the Word document to Markdown")
         md_content = []
         for paragraph in doc.paragraphs:
             if paragraph.style.name.startswith('Heading'):
@@ -37,23 +33,13 @@ def upload_file():
         md_string = '\n\n'.join(md_content)
         return jsonify({'message': 'File successfully converted', 'md_content': md_string}), 200
 
-    print("Error: Invalid file type")
-    return jsonify({'error': 'Invalid file type'}), 400
-
-@app.route('/api/upload/pdf', methods=['POST'])
-def upload_pdf():
-    if 'file' not in request.files:
-        return jsonify({'error': 'No file part in the request'}), 400
-
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({'error': 'No selected file'}), 400
-
-    if file and allowed_file(file.filename, {'pdf'}):
+    # Handle PDF
+    elif file and allowed_file(file.filename, {'pdf'}):
         with tempfile.TemporaryDirectory() as path:
             images = convert_from_bytes(file.read(), output_folder=path)
             return jsonify({'message': f'Converted PDF to {len(images)} images'}), 200
 
+    # Invalid file type
     return jsonify({'error': 'Invalid file type'}), 400
 
 if __name__ == '__main__':

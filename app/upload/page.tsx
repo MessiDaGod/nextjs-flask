@@ -30,7 +30,7 @@ export default function WordToMd() {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch("/api/upload/pdf", {
+      const response = await fetch("/api/upload", {
         method: "POST",
         body: formData,
       });
