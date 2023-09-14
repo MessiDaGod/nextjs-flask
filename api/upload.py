@@ -3,6 +3,8 @@ from werkzeug.utils import secure_filename
 from docx import Document
 from pdf2image import convert_from_bytes
 import tempfile
+import base64
+from io import BytesIO
 
 app = Flask(__name__)
 app.debug = True
@@ -37,7 +39,13 @@ def upload_file():
     elif file and allowed_file(file.filename, {'pdf'}):
         with tempfile.TemporaryDirectory() as path:
             images = convert_from_bytes(file.read(), output_folder=path)
-            return jsonify({'message': f'Converted PDF to {len(images)} images'}), 200
+            base64_images = []
+            for img in images:
+                buffered = BytesIO()
+                img.save(buffered, format="PNG")
+                img_str = base64.b64encode(buffered.getvalue()).decode()
+                base64_images.append(img_str)
+            return jsonify({'message': f'Converted PDF to {len(images)} images', 'images': base64_images}), 200
 
     # Invalid file type
     return jsonify({'error': 'Invalid file type'}), 400
