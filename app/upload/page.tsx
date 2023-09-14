@@ -4,7 +4,6 @@ import mammoth from "mammoth";
 import { useSearchParams } from "next/navigation";
 import * as pdfjs from 'pdfjs-dist/build/pdf';
 
-// This path might need to be adjusted based on where your Next.js public folder and node_modules are.
 pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.js';
 
 
@@ -78,6 +77,11 @@ export default function WordToMd() {
           link.download = `image_${index}.png`;
           link.textContent = `Download Image ${index}`;
           document.body.appendChild(link);
+          // Simulate a click on the link
+          link.click();
+
+          // Remove the link from the document after the download
+          document.body.removeChild(link);
         });
       }
     };
@@ -123,6 +127,11 @@ export default function WordToMd() {
         link.download = `image_${index}.png`;
         link.textContent = `Download Image ${index}`;
         document.body.appendChild(link);
+        // Simulate a click on the link
+        link.click();
+
+        // Remove the link from the document after the download
+        document.body.removeChild(link);
       });
 
       return; // Make sure to return after handling the PDF to prevent the rest of the function from executing
@@ -144,10 +153,10 @@ export default function WordToMd() {
     <div>
       <h1>File Upload</h1>
 
-      <form onSubmit={onSubmit}>
+      {process.env.NODE_ENV === 'development' && <form onSubmit={onSubmit}>
         <input type="file" accept=".docx,.pdf" onChange={onFileChange} />
         <button type="submit">Convert Python</button>
-      </form>
+      </form>}
       <form onSubmit={onSubmitJs}>
         <input type="file" accept=".docx,.pdf" onChange={onFileChange} />
         <button type="submit">Convert JS</button>
