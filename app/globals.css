@@ -97,7 +97,7 @@ i.symbol:hover {
 .button {
   border-radius: 16px;
   display: flex;
-  align-items: center;  /* This will vertically align the content */
+  align-items: center;
   color: #8a96a3;
   overflow: hidden;
 }
@@ -162,4 +162,45 @@ div.active {
 }
 .button-label {
   background-color: transparent;
+}
+i.symbol.sm {
+  font-size: 22px;
+}
+i.button.sm {
+  font-size: 22px;
+}
+i.button.sm {
+  font-size: 14px;
+  background-color: #f1f2f4;
+  padding: 5px;
+  font-weight: bold;
+}
+i.button.sm.active {
+  font-size: 14px;
+  background-color:#bfebfb;
+  padding: 5px;
+  font-weight: bold;
+}
+textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.divider {
+  display: flex;
+  background-color: #f1f2f4;
+  height: 10px;
+}
+.tooltip {
+  position: absolute;
+  top: 100%;  /* Changed from bottom to top */
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);  /* Adjusted the transform */
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 12px;
+  pointer-events: none; /* So it doesn't interfere with other interactions */
 }

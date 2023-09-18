@@ -17,6 +17,7 @@ export default function MainContainer({}) {
     flexShrink: 0, // This prevents the column from shrinking below its initial width
     height: "100%",
     overflowX: "hidden",
+    minWidth: "76px",
   };
 
   const resizerStyle: React.CSSProperties = {
