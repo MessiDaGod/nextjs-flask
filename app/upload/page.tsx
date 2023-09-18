@@ -5,13 +5,14 @@ import { useSearchParams } from "next/navigation";
 import * as pdfjs from "pdfjs-dist/build/pdf";
 import { Document, Page } from "react-pdf";
 import { pdfjs as reactpdf } from "react-pdf";
-reactpdf.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+reactpdf.GlobalWorkerOptions.workerSrc = `./pdf.worker.js`;
+pdfjs.GlobalWorkerOptions.workerSrc = `./pdf.worker.js`;
 
 const DEFAULT_SCALE_DELTA = 1.1;
 const TOOLBAR_HEIGHT = 32;
 const DEFAULT_ZOOM_SCALE = 1.3;
 
-export default function WordToMd() {
+export default function Upload() {
   const [file, setFile] = useState<File | null>(null);
   const [docxHtml, setDocxHtml] = useState<string | null>(null);
   const [images, setImages] = useState<string[]>([]);

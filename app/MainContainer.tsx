@@ -4,6 +4,7 @@ import Icon from "./Icon";
 import cn from "classnames";
 import HomePage from "./HomePage";
 import Link from "next/link";
+import Upload from "./upload/page";
 
 export default function MainContainer({}) {
   const [isResizing, setIsResizing] = useState(false);
@@ -220,7 +221,7 @@ export default function MainContainer({}) {
             activeButton === "upload" ? "active" : ""
           )}
         >
-          <Link href="/upload">
+          <Link href="/upload?type=pdf">
             <Icon symbol="upload" />
             <span
               className="button-label"
@@ -239,7 +240,8 @@ export default function MainContainer({}) {
       </div>
       <div style={resizerStyle} onMouseDown={handleMouseDown}></div>
       <div style={middleColumnStyle}>
-        <HomePage />
+        {activeButton === 'home' && <HomePage />}
+        {activeButton === 'upload' && <Upload />}
       </div>
       <div style={rightColumnStyle}></div>
     </>
