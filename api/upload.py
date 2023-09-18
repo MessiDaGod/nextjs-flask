@@ -5,9 +5,15 @@ from pdf2image import convert_from_bytes
 import tempfile
 import base64
 from io import BytesIO
+import shutil
+import logging
+import os
 
 app = Flask(__name__)
 app.debug = True
+# Set up logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 ALLOWED_EXTENSIONS = {'docx', 'pdf'}
 
 def allowed_file(filename, allowed_extensions):
@@ -50,5 +56,29 @@ def upload_file():
     # Invalid file type
     return jsonify({'error': 'Invalid file type'}), 400
 
+@app.route('/api/upload', methods=['GET'])
+def copy_pdf_worker():
+    try:
+        # Determine the current working directory
+        current_dir = os.getcwd()
+        logger.debug(f"Current directory: {current_dir}")
+
+        pdfjs_dist_path = os.path.join(current_dir, 'node_modules', 'pdfjs-dist')
+        if not os.path.exists(pdfjs_dist_path):
+            logger.error(f"pdfjsDistPath doesn't exist: {pdfjs_dist_path}")
+            return jsonify(success=False, message="pdfjsDistPath doesn't exist"), 500
+
+        pdf_worker_path = os.path.join(pdfjs_dist_path, 'build', 'pdf.worker.js')
+        if not os.path.exists(pdf_worker_path):
+            logger.error(f"pdfWorkerPath doesn't exist: {pdf_worker_path}")
+            return jsonify(success=False, message="pdfWorkerPath doesn't exist"), 500
+
+        # Rest of the code remains unchanged...
+
+    except Exception as e:
+        logger.error(f"An error occurred: {str(e)}")
+        return jsonify(success=False, message=str(e)), 500
+
 if __name__ == '__main__':
     app.run(debug=True)
+s

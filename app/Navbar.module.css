@@ -1,9 +1,12 @@
 .root {
-  @apply sticky top-0 bg-black z-40 transition-all duration-150 h-16 md:h-20;
+  @apply sticky top-0 bg-black z-40 transition-all duration-150 h-10 md:h-14;
 }
 
 .link {
   @apply inline-flex items-center leading-6 font-medium transition ease-in-out duration-75 cursor-pointer text-zinc-200 rounded-md p-1;
+}
+.md\:h-14 {
+  height: 3.5rem;
 }
 
 .link:hover {
@@ -17,3 +20,15 @@
 .logo {
   @apply cursor-pointer rounded-full transform duration-100 ease-in-out;
 }
+.icon {
+  width: 50px; /* or whatever width you desire for the icon */
+  height: auto;
+}
+
+.white {
+  color: white;
+}
+
+/* .column {
+  height: calc(100% - 3.5rem);
+} */

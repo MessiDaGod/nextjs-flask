@@ -11,6 +11,11 @@ const nextConfig = {
       use: 'node-loader',
     });
 
+    config.module.rules.push({
+      test: /\.node/,
+      use: 'raw-loader',
+    });
+
     return config;
   },
   rewrites: async () => {

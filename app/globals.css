@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -24,4 +29,45 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+button[type="submit"] {
+  position: absolute;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  transition: 0.3s;
+  color: black;
+  background-color: #e0e0e0;
+}
+
+button[type="submit"]:hover {
+  background-color: #0de72a;
+  color: white;
+  cursor: pointer;
+}
+
+button[type="submit"]:disabled {
+  background-color: #e0e0e0;
+}
+
+button[type="submit"]:disabled:hover {
+  background-color: #e0e0e0;
+  color: black;
+  cursor: not-allowed;
+}
+
+/* This is the message that appears on hover */
+button[type="submit"]:disabled:hover::after {
+  content: "Upload PDF file to convert";
+  position: absolute;
+  top: -30px; /* adjust as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333; /* Background color of the tooltip */
+  color: #fff; /* Text color */
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px; /* adjust as needed */
+  pointer-events: none; /* Ensures tooltip doesn't interfere with other UI elements */
 }
