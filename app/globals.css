@@ -191,11 +191,16 @@ textarea:focus {
   background-color: #f1f2f4;
   height: 10px;
 }
+.icon-container {
+  position: relative;
+  display: inline-block;
+}
+
 .tooltip {
   position: absolute;
-  top: 100%;  /* Changed from bottom to top */
+  top: -30px;  /* Adjust this value based on the size of your tooltip */
   left: 50%;
-  transform: translateX(-50%) translateY(10px);  /* Adjusted the transform */
+  transform: translateX(-50%);
   background-color: #333;
   color: #fff;
   padding: 5px 10px;

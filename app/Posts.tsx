@@ -26,13 +26,18 @@ export default function Posts({}) {
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "flex-start",
           flexDirection: "row",
           paddingLeft: "10px",
           paddingRight: "10px",
         }}
       >
-        <Icon symbol="ballot" tooltip="Add a Quiz"/>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <Icon symbol="ballot" tooltip="Add a Quiz" />
+        </div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <Icon symbol="how_to_vote" tooltip="Add a Poll" />
+        </div>
       </div>
       <div className="divider"></div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
