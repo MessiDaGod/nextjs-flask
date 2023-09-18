@@ -1,11 +1,11 @@
 import Navbar from "./NavBar";
 import "./globals.css";
-import { Inter } from "next/font/google";
+import MainContainer from "./MainContainer";
 
 const containerStyle: React.CSSProperties = {
   display: "flex",
   width: "100vw",
-  height: "calc(100% - 3.5rem)"
+  height: "calc(100% - 3.5rem)",
 };
 
 const leftColumnStyle: React.CSSProperties = {
@@ -14,12 +14,12 @@ const leftColumnStyle: React.CSSProperties = {
   backgroundColor: "#e0e0e0",
   width: "20%",
   marginRight: "5px",
-  height: "100%"
+  height: "100%",
 };
 
 const middleColumnContainerStyle: React.CSSProperties = {
   padding: "0 5px 0 0",
-  height: "100%"
+  height: "100%",
 };
 
 const middleColumnStyle: React.CSSProperties = {
@@ -28,7 +28,7 @@ const middleColumnStyle: React.CSSProperties = {
   resize: "horizontal",
   cursor: "ew-resize",
   overflow: "auto",
-  height: "100%"
+  height: "100%",
 };
 
 const rightColumnStyle: React.CSSProperties = {
@@ -36,7 +36,7 @@ const rightColumnStyle: React.CSSProperties = {
   backgroundColor: "#a0a0a0",
   overflow: "auto",
   marginRight: "5px",
-  height: "100%"
+  height: "100%",
 };
 
 export const metadata = {
@@ -54,9 +54,7 @@ export default function RootLayout({
       <body>
         <Navbar />
         <div style={containerStyle}>
-          <div style={leftColumnStyle}>Left Column</div>
-          <div style={middleColumnStyle}>Middle Column</div>
-          <div style={rightColumnStyle}>Right Column</div>
+          <MainContainer />
           {children}
         </div>
       </body>
