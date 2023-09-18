@@ -12,27 +12,31 @@ export default function MainContainer({}) {
     flexBasis: leftColumnWidth, // This sets the initial width
     flexGrow: 0, // This prevents the column from growing beyond its initial width
     flexShrink: 0, // This prevents the column from shrinking below its initial width
+    height: "100%",
+  };
+
+  const resizerStyle: React.CSSProperties = {
+    cursor: "ew-resize",
+    backgroundColor: "#e0e0e0",
+    width: "10px",
     marginRight: "5px",
     height: "100%",
   };
 
   const middleColumnStyle: React.CSSProperties = {
-    flex: "1",
     backgroundColor: "#c0c0c0",
-    resize: "horizontal",
-    cursor: "ew-resize",
     overflow: "auto",
-    height: "100%",
-  };
-
-  const rightColumnStyle: React.CSSProperties = {
-    flex: "0.4",
-    backgroundColor: "#a0a0a0",
-    overflow: "auto",
+    flexGrow: 1, // This allows the column to take up remaining space
     marginRight: "5px",
     height: "100%",
   };
 
+  const rightColumnStyle: React.CSSProperties = {
+    backgroundColor: "#a0a0a0",
+    overflow: "auto",
+    flexGrow: 0.4, // This defines the proportion of the remaining space this column should occupy
+    height: "100%",
+  };
 
   useEffect(() => {
     function handleMouseMove(e: MouseEvent) {
@@ -58,22 +62,23 @@ export default function MainContainer({}) {
   }, [isResizing]);
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    // Check if the mouse is within the right edge margin of the column
-    if (e.currentTarget.offsetWidth - e.nativeEvent.offsetX <= 5) {
-      setIsResizing(true);
-    }
+    setIsResizing(true);
   };
 
   return (
     <>
-      <div
-        style={{ ...leftColumnStyle, width: leftColumnWidth }}
-        onMouseDown={handleMouseDown}
-      >
-        Left Column
+      <div style={{ ...leftColumnStyle }}>
+
       </div>
-      <div style={middleColumnStyle}>Middle Column</div>
-      <div style={rightColumnStyle}>Right Column</div>
+      <div style={resizerStyle} onMouseDown={handleMouseDown}>
+
+      </div>
+      <div style={middleColumnStyle}>
+
+      </div>
+      <div style={rightColumnStyle}>
+
+      </div>
     </>
   );
 }
