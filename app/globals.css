@@ -2,11 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -23,12 +25,9 @@ html, body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 button[type="submit"] {
@@ -61,16 +60,22 @@ button[type="submit"]:disabled:hover {
 button[type="submit"]:disabled:hover::after {
   content: "Upload PDF file to convert";
   position: absolute;
-  top: -30px; /* adjust as needed */
+  top: -30px;
+  /* adjust as needed */
   left: 50%;
   transform: translateX(-50%);
-  background-color: #333; /* Background color of the tooltip */
-  color: #fff; /* Text color */
+  background-color: #333;
+  /* Background color of the tooltip */
+  color: #fff;
+  /* Text color */
   padding: 4px 8px;
   border-radius: 4px;
-  font-size: 12px; /* adjust as needed */
-  pointer-events: none; /* Ensures tooltip doesn't interfere with other UI elements */
+  font-size: 12px;
+  /* adjust as needed */
+  pointer-events: none;
+  /* Ensures tooltip doesn't interfere with other UI elements */
 }
+
 i.symbol {
   font-family: var(--font-family-symbols);
   font-weight: normal;
@@ -90,6 +95,7 @@ i.symbol {
   width: '100%';
   cursor: pointer;
 }
+
 i.symbol:hover {
   color: #64bbf1;
 }
@@ -101,14 +107,17 @@ i.symbol:hover {
   color: #8a96a3;
   overflow: hidden;
 }
+
 .ml-6 {
   margin-left: 1.5rem;
   border-radius: 16px;
 }
+
 .mb-4 {
   margin-bottom: 1rem;
   border-radius: 16px;
 }
+
 .mt-4 {
   margin-top: 1rem;
   border-radius: 16px;
@@ -119,16 +128,20 @@ i.symbol:hover {
   background-color: #eff8fd;
   border-radius: 16px;
 }
-.button:hover > * {
+
+.button:hover>* {
   color: #64bbf1;
   border-radius: 16px;
 }
+
 .button:hover span {
   color: #64bbf1;
 }
-i.symbol{
+
+i.symbol {
   border-radius: 16px;
 }
+
 div.active {
   color: black;
 }
@@ -154,33 +167,40 @@ div.active {
   font-size: 26px;
   padding-right: 10px;
 }
+
 @media (max-width: 153px) {
   span.button-label {
-      display: none;
-      color: red;
+    display: none;
+    color: red;
   }
 }
+
 .button-label {
   background-color: transparent;
 }
+
 i.symbol.sm {
   font-size: 22px;
 }
+
 i.button.sm {
   font-size: 22px;
 }
+
 i.button.sm {
   font-size: 14px;
   background-color: #f1f2f4;
   padding: 5px;
   font-weight: bold;
 }
+
 i.button.sm.active {
   font-size: 14px;
-  background-color:#bfebfb;
+  background-color: #bfebfb;
   padding: 5px;
   font-weight: bold;
 }
+
 textarea:focus {
   outline: none;
   box-shadow: none;
@@ -191,6 +211,7 @@ textarea:focus {
   background-color: #f1f2f4;
   height: 10px;
 }
+
 .icon-container {
   position: relative;
   display: inline-block;
@@ -198,7 +219,8 @@ textarea:focus {
 
 .tooltip {
   position: absolute;
-  top: -30px;  /* Adjust this value based on the size of your tooltip */
+  top: -30px;
+  /* Adjust this value based on the size of your tooltip */
   left: 50%;
   transform: translateX(-50%);
   background-color: #333;
@@ -207,5 +229,13 @@ textarea:focus {
   border-radius: 4px;
   white-space: nowrap;
   font-size: 12px;
-  pointer-events: none; /* So it doesn't interfere with other interactions */
+  pointer-events: none;
+  z-index: 999;
+}
+
+a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5px;
 }

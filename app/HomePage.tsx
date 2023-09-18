@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Icon from "./Icon";
 import cn from "classnames";
 import Posts from "./Posts";
+import Link from "next/link";
 
 export default function HomePage({}) {
   return (
@@ -16,7 +17,9 @@ export default function HomePage({}) {
         }}
       >
         <div className="homepage">
-          <span>Home</span>
+          <Link href="/">
+            <span>Home</span>
+          </Link>
         </div>
         <div className="homepage-right">
           <Icon symbol="more_vert" />

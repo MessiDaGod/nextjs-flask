@@ -4,46 +4,46 @@ import mammoth from "mammoth";
 import { useSearchParams } from "next/navigation";
 import * as pdfjs from "pdfjs-dist/build/pdf";
 import { Document, Page } from "react-pdf";
-import { pdfjs as reactpdf } from 'react-pdf';
-reactpdf.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
+import { pdfjs as reactpdf } from "react-pdf";
+reactpdf.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const DEFAULT_SCALE_DELTA = 1.1
-const TOOLBAR_HEIGHT = 32
-const DEFAULT_ZOOM_SCALE = 1.3
+const DEFAULT_SCALE_DELTA = 1.1;
+const TOOLBAR_HEIGHT = 32;
+const DEFAULT_ZOOM_SCALE = 1.3;
 
 export default function WordToMd() {
   const [file, setFile] = useState<File | null>(null);
   const [docxHtml, setDocxHtml] = useState<string | null>(null);
   const [images, setImages] = useState<string[]>([]);
-  const [numPages, setNumPages] = useState(null)
-  const [currentPage, setCurrentPage] = useState(1)
-  const [fileBase64, setFileBase64] = useState<string | null>(null)
-  const [ui8intarray, setui8intarray] = useState<Uint8Array | null>(null)
-  const [showPDF, setShowPDF] = useState(false)
-  const [pdf, setPdf] = useState(null)
+  const [numPages, setNumPages] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [fileBase64, setFileBase64] = useState<string | null>(null);
+  const [ui8intarray, setui8intarray] = useState<Uint8Array | null>(null);
+  const [showPDF, setShowPDF] = useState(false);
+  const [pdf, setPdf] = useState(null);
 
-  const [zoom, setZoom] = useState(DEFAULT_ZOOM_SCALE)
-  const [filename, setfilename] = useState(null)
+  const [zoom, setZoom] = useState(DEFAULT_ZOOM_SCALE);
+  const [filename, setfilename] = useState(null);
 
   const searchParams = useSearchParams();
   const type = searchParams?.get("type");
 
-  useEffect(() => {
-    async function fetchApi() {
-      try {
-        const response = await fetch('/api/upload');
-        const data = await response.json();
+  // useEffect(() => {
+  //   async function fetchApi() {
+  //     try {
+  //       const response = await fetch('/api/upload');
+  //       const data = await response.json();
 
-        if (!data.success) {
-          console.error('Failed to copy PDF Worker:', data.message);
-        }
-      } catch (error) {
-        console.error('Error fetching API route:', error);
-      }
-    }
+  //       if (!data.success) {
+  //         console.error('Failed to copy PDF Worker:', data.message);
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching API route:', error);
+  //     }
+  //   }
 
-    fetchApi();
-  }, []);
+  //   fetchApi();
+  // }, []);
 
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -80,22 +80,22 @@ export default function WordToMd() {
 
   function readFileAsUint8Array(file: File): Promise<Uint8Array> {
     return new Promise((resolve, reject) => {
-      const reader = new FileReader()
+      const reader = new FileReader();
 
       reader.onload = (event) => {
         //@ts-ignore
-        const arrayBuffer = event.target.result as ArrayBuffer
-        const uint8Array = new Uint8Array(arrayBuffer)
-        resolve(uint8Array)
-      }
+        const arrayBuffer = event.target.result as ArrayBuffer;
+        const uint8Array = new Uint8Array(arrayBuffer);
+        resolve(uint8Array);
+      };
 
       reader.onerror = (event) => {
         //@ts-ignore
-        reject(event.target.error)
-      }
+        reject(event.target.error);
+      };
 
-      reader.readAsArrayBuffer(file)
-    })
+      reader.readAsArrayBuffer(file);
+    });
   }
 
   async function onSubmitJs(e: React.FormEvent) {
@@ -108,17 +108,17 @@ export default function WordToMd() {
 
     const formData = new FormData();
     formData.append("file", file);
-    const pdfFile = file
-    if (!pdfFile) return
+    const pdfFile = file;
+    if (!pdfFile) return;
     if (pdfFile.size > 1024 * 1024) {
-      alert('File size exceeds 1MB')
-      return
+      alert("File size exceeds 1MB");
+      return;
     }
-    setFile(pdfFile)
-    const base64 = await convertToBase64(pdfFile)
-    setFileBase64(base64)
-    const ui8 = await readFileAsUint8Array(file as File)
-    setui8intarray(ui8)
+    setFile(pdfFile);
+    const base64 = await convertToBase64(pdfFile);
+    setFileBase64(base64);
+    const ui8 = await readFileAsUint8Array(file as File);
+    setui8intarray(ui8);
     await onSubmitPdf(e);
     const reader = new FileReader();
     reader.onload = async (event) => {
@@ -228,53 +228,53 @@ export default function WordToMd() {
   };
 
   function onDocumentLoadSuccess(pdf: any) {
-    setNumPages(pdf.numPages)
-    setPdf(pdf)
+    setNumPages(pdf.numPages);
+    setPdf(pdf);
   }
 
   function convertToBase64(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
-      const reader = new FileReader()
+      const reader = new FileReader();
 
       reader.onload = () => {
-        const base64String = (reader.result as string).split(',')[1]
-        resolve(base64String)
-      }
+        const base64String = (reader.result as string).split(",")[1];
+        resolve(base64String);
+      };
 
       reader.onerror = (error) => {
-        reject(error)
-      }
+        reject(error);
+      };
 
-      reader.readAsDataURL(file)
-    })
+      reader.readAsDataURL(file);
+    });
   }
-
 
   const options = {
-    cMapUrl: 'cmaps/',
-    standardFontDataUrl: 'standard_fonts/',
-  }
+    cMapUrl: "cmaps/",
+    standardFontDataUrl: "standard_fonts/",
+  };
 
-  let width = 500
+  let width = 500;
 
   return (
-    <></>
-    // <div>
-    //   <h1>File Upload</h1>
-    //   <form onSubmit={onSubmitJs}>
-    //     <input type="file" accept=".pdf" onChange={onFileChange} />
-    //     <button type="submit" disabled={file ? false : true}>
-    //       Convert PDF to Image(s)
-    //     </button>
-    //   </form>
+    <>
+      <div>
+        <h1>File Upload</h1>
+        <form onSubmit={onSubmitJs}>
+          <input type="file" accept=".pdf" onChange={onFileChange} />
+          <button type="submit" disabled={file ? false : true}>
+            Convert PDF to Image(s)
+          </button>
+        </form>
 
-    //   {fileBase64 && (
-    //             <Document file={fileBase64} onLoadSuccess={onDocumentLoadSuccess}>
-    //                 {Array.from(new Array(numPages), (_, index) => (
-    //                     <Page key={`page_${index + 1}`} pageNumber={index + 1} />
-    //                 ))}
-    //             </Document>
-    //         )}
-    // </div>
+        {fileBase64 && (
+          <Document file={fileBase64} onLoadSuccess={onDocumentLoadSuccess}>
+            {Array.from(new Array(numPages), (_, index) => (
+              <Page key={`page_${index + 1}`} pageNumber={index + 1} />
+            ))}
+          </Document>
+        )}
+      </div>
+    </>
   );
 }

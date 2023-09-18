@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from "react";
 import Icon from "./Icon";
 import cn from "classnames";
-import HomePage from './HomePage'
+import HomePage from "./HomePage";
+import Link from "next/link";
 
 export default function MainContainer({}) {
   const [isResizing, setIsResizing] = useState(false);
@@ -85,8 +86,21 @@ export default function MainContainer({}) {
             activeButton === "home" ? "active" : ""
           )}
         >
-          <Icon symbol="home" />
-          <span className="button-label" style={{ paddingLeft: '20px',  display: parseInt(leftColumnWidth.replace('px', '')) <= 150 ? 'none' : 'flex' }}>Home</span>
+          <Link href="/">
+            <Icon symbol="home" />
+            <span
+              className="button-label"
+              style={{
+                paddingLeft: "20px",
+                display:
+                  parseInt(leftColumnWidth.replace("px", "")) <= 150
+                    ? "none"
+                    : "flex",
+              }}
+            >
+              Home
+            </span>
+          </Link>
         </div>
         <div
           onClick={() => handleButtonClick("notifications")}
@@ -97,7 +111,18 @@ export default function MainContainer({}) {
           )}
         >
           <Icon symbol="notifications" />
-          <span className="button-label" style={{ paddingLeft: '20px',  display: parseInt(leftColumnWidth.replace('px', '')) <= 150 ? 'none' : 'flex' }}>Notifications</span>
+          <span
+            className="button-label"
+            style={{
+              paddingLeft: "20px",
+              display:
+                parseInt(leftColumnWidth.replace("px", "")) <= 150
+                  ? "none"
+                  : "flex",
+            }}
+          >
+            Notifications
+          </span>
         </div>
         <div
           onClick={() => handleButtonClick("message")}
@@ -108,7 +133,18 @@ export default function MainContainer({}) {
           )}
         >
           <Icon symbol="message" />
-          <span className="button-label" style={{ paddingLeft: '20px',  display: parseInt(leftColumnWidth.replace('px', '')) <= 150 ? 'none' : 'flex'  }}>Messages</span>
+          <span
+            className="button-label"
+            style={{
+              paddingLeft: "20px",
+              display:
+                parseInt(leftColumnWidth.replace("px", "")) <= 150
+                  ? "none"
+                  : "flex",
+            }}
+          >
+            Messages
+          </span>
         </div>
         <div
           onClick={() => handleButtonClick("group")}
@@ -119,7 +155,18 @@ export default function MainContainer({}) {
           )}
         >
           <Icon symbol="group" />
-          <span className="button-label" style={{ paddingLeft: '20px',  display: parseInt(leftColumnWidth.replace('px', '')) <= 150 ? 'none' : 'flex' }}>Subscriptions</span>
+          <span
+            className="button-label"
+            style={{
+              paddingLeft: "20px",
+              display:
+                parseInt(leftColumnWidth.replace("px", "")) <= 150
+                  ? "none"
+                  : "flex",
+            }}
+          >
+            Subscriptions
+          </span>
         </div>
         <div
           onClick={() => handleButtonClick("account_circle")}
@@ -130,7 +177,18 @@ export default function MainContainer({}) {
           )}
         >
           <Icon symbol="account_circle" />
-          <span className="button-label" style={{ paddingLeft: '20px',  display: parseInt(leftColumnWidth.replace('px', '')) <= 150 ? 'none' : 'flex' }}>Profile</span>
+          <span
+            className="button-label"
+            style={{
+              paddingLeft: "20px",
+              display:
+                parseInt(leftColumnWidth.replace("px", "")) <= 150
+                  ? "none"
+                  : "flex",
+            }}
+          >
+            Profile
+          </span>
         </div>
         <div
           onClick={() => handleButtonClick("pending")}
@@ -141,12 +199,47 @@ export default function MainContainer({}) {
           )}
         >
           <Icon symbol="pending" />
-          <span className="button-label" style={{ paddingLeft: '20px', display: parseInt(leftColumnWidth.replace('px', '')) <= 150 ? 'none' : 'flex' }}>More</span>
+          <span
+            className="button-label"
+            style={{
+              paddingLeft: "20px",
+              display:
+                parseInt(leftColumnWidth.replace("px", "")) <= 150
+                  ? "none"
+                  : "flex",
+            }}
+          >
+            More
+          </span>
+        </div>
+        <div
+          onClick={() => handleButtonClick("upload")}
+          style={{ width: "100%", userSelect: "none" }}
+          className={cn(
+            "button ml-6 mb-6",
+            activeButton === "upload" ? "active" : ""
+          )}
+        >
+          <Link href="/upload">
+            <Icon symbol="upload" />
+            <span
+              className="button-label"
+              style={{
+                paddingLeft: "20px",
+                display:
+                  parseInt(leftColumnWidth.replace("px", "")) <= 150
+                    ? "none"
+                    : "flex",
+              }}
+            >
+              Upload
+            </span>
+          </Link>
         </div>
       </div>
       <div style={resizerStyle} onMouseDown={handleMouseDown}></div>
       <div style={middleColumnStyle}>
-          <HomePage />
+        <HomePage />
       </div>
       <div style={rightColumnStyle}></div>
     </>
