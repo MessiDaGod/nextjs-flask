@@ -1,42 +1,20 @@
 import Navbar from "./NavBar";
 import "./globals.css";
 import MainContainer from "./MainContainer";
+import localFont from 'next/font/local'
+
+const materialSymbols = localFont({
+  variable: '--font-family-symbols',
+  style: 'normal',
+  src: '../node_modules/material-symbols/material-symbols-rounded.woff2',
+  display: 'block',
+  weight: '100 700',
+})
 
 const containerStyle: React.CSSProperties = {
   display: "flex",
   width: "100vw",
   height: "calc(100% - 3.5rem)",
-};
-
-const leftColumnStyle: React.CSSProperties = {
-  overflow: "auto",
-  resize: "horizontal",
-  backgroundColor: "#e0e0e0",
-  width: "20%",
-  marginRight: "5px",
-  height: "100%",
-};
-
-const middleColumnContainerStyle: React.CSSProperties = {
-  padding: "0 5px 0 0",
-  height: "100%",
-};
-
-const middleColumnStyle: React.CSSProperties = {
-  flex: "1",
-  backgroundColor: "#c0c0c0",
-  resize: "horizontal",
-  cursor: "ew-resize",
-  overflow: "auto",
-  height: "100%",
-};
-
-const rightColumnStyle: React.CSSProperties = {
-  flex: "0.4",
-  backgroundColor: "#a0a0a0",
-  overflow: "auto",
-  marginRight: "5px",
-  height: "100%",
 };
 
 export const metadata = {
@@ -50,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${materialSymbols.variable}`}>
       <body>
         <Navbar />
         <div style={containerStyle}>

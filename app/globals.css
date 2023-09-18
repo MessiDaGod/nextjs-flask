@@ -71,3 +71,95 @@ button[type="submit"]:disabled:hover::after {
   font-size: 12px; /* adjust as needed */
   pointer-events: none; /* Ensures tooltip doesn't interfere with other UI elements */
 }
+i.symbol {
+  font-family: var(--font-family-symbols);
+  font-weight: normal;
+  font-style: normal;
+  font-size: 36px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga';
+  width: '100%';
+  cursor: pointer;
+}
+i.symbol:hover {
+  color: #64bbf1;
+}
+
+.button {
+  border-radius: 16px;
+  display: flex;
+  align-items: center;  /* This will vertically align the content */
+  color: #8a96a3;
+  overflow: hidden;
+}
+.ml-6 {
+  margin-left: 1.5rem;
+  border-radius: 16px;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+  border-radius: 16px;
+}
+.mt-4 {
+  margin-top: 1rem;
+  border-radius: 16px;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: #eff8fd;
+  border-radius: 16px;
+}
+.button:hover > * {
+  color: #64bbf1;
+  border-radius: 16px;
+}
+.button:hover span {
+  color: #64bbf1;
+}
+i.symbol{
+  border-radius: 16px;
+}
+div.active {
+  color: black;
+}
+
+.homepage {
+  user-select: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+  font-size: 26px;
+  padding-left: 10px;
+  color: black;
+}
+
+.homepage-right {
+  user-select: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  font-size: 26px;
+  padding-right: 10px;
+}
+@media (max-width: 153px) {
+  span.button-label {
+      display: none;
+      color: red;
+  }
+}
+.button-label {
+  background-color: transparent;
+}
