@@ -1,18 +1,21 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import mammoth from "mammoth";
 import { useSearchParams } from "next/navigation";
 import * as pdfjs from "pdfjs-dist/build/pdf";
 import { Document, Page } from "react-pdf";
 import { pdfjs as reactpdf } from "react-pdf";
-reactpdf.GlobalWorkerOptions.workerSrc = `./pdf.worker.js`;
 pdfjs.GlobalWorkerOptions.workerSrc = `./pdf.worker.js`;
+reactpdf.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url,
+).toString();
 
 const DEFAULT_SCALE_DELTA = 1.1;
 const TOOLBAR_HEIGHT = 32;
 const DEFAULT_ZOOM_SCALE = 1.3;
 
-export default function Upload() {
+export default function Upload({type}: {type: string}) {
   const [file, setFile] = useState<File | null>(null);
   const [docxHtml, setDocxHtml] = useState<string | null>(null);
   const [images, setImages] = useState<string[]>([]);
@@ -23,11 +26,15 @@ export default function Upload() {
   const [showPDF, setShowPDF] = useState(false);
   const [pdf, setPdf] = useState(null);
 
-  const [zoom, setZoom] = useState(DEFAULT_ZOOM_SCALE);
-  const [filename, setfilename] = useState(null);
+  if (!type) {
+    type = 'pdf'
+  }
 
-  const searchParams = useSearchParams();
-  const type = searchParams?.get("type");
+  // const [zoom, setZoom] = useState(DEFAULT_ZOOM_SCALE);
+  // const [filename, setfilename] = useState(null);
+
+  // const searchParams = useSearchParams();
+  // const type = searchParams?.get("type");
 
   // useEffect(() => {
   //   async function fetchApi() {
@@ -250,16 +257,23 @@ export default function Upload() {
     });
   }
 
-  const options = {
-    cMapUrl: "cmaps/",
-    standardFontDataUrl: "standard_fonts/",
-  };
+  // const options = {
+  //   cMapUrl: "cmaps/",
+  //   standardFontDataUrl: "standard_fonts/",
+  // };
 
-  let width = 500;
+
+  // const middleColumnStyle: React.CSSProperties = {
+  //   backgroundColor: "#ffffff",
+  //   overflow: "auto",
+  //   flexGrow: 1, // This allows the column to take up remaining space
+  //   marginRight: "5px",
+  //   height: "100%",
+  // };
+
 
   return (
-    <>
-      <div>
+    <div>
         <h1>File Upload</h1>
         <form onSubmit={onSubmitJs}>
           <input type="file" accept=".pdf" onChange={onFileChange} />
@@ -267,15 +281,13 @@ export default function Upload() {
             Convert PDF to Image(s)
           </button>
         </form>
-
-        {fileBase64 && (
-          <Document file={fileBase64} onLoadSuccess={onDocumentLoadSuccess}>
+        {/* {pdf && (
+          <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
             {Array.from(new Array(numPages), (_, index) => (
               <Page key={`page_${index + 1}`} pageNumber={index + 1} />
             ))}
           </Document>
-        )}
-      </div>
-    </>
+        )} */}
+    </div>
   );
 }
