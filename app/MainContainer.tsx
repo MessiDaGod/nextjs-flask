@@ -241,7 +241,7 @@ export default function MainContainer({}) {
       <div style={resizerStyle} onMouseDown={handleMouseDown}></div>
       <div style={middleColumnStyle}>
         {activeButton === 'home' && <HomePage />}
-        {activeButton === 'upload' && <Upload type='pdf' />}
+        {activeButton === 'upload' && <Upload />}
       </div>
       <div style={rightColumnStyle}></div>
     </>
