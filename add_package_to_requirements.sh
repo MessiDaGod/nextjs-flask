@@ -1,0 +1,1 @@
+echo "pandas==$(pip show pandas | grep Version | cut -d ' ' -f 2)" >> requirements.txt

@@ -221,7 +221,7 @@ export default function MainContainer({}) {
             activeButton === "upload" ? "active" : ""
           )}
         >
-          <Link href="/upload?type=pdf">
+          <Link href="/upload">
             <Icon symbol="upload" />
             <span
               className="button-label"
