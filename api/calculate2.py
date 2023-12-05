@@ -13,7 +13,7 @@ logger = logging.getLogger('tdm')
 logger.setLevel(logging.INFO)
 logger.addHandler(handler)
 
-@app.route('/api/python', methods=['POST'])
+@app.route('/api/calculate', methods=['POST'])
 def calculate():
     logger.info('Received request for /calculate')
 

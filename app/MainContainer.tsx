@@ -5,6 +5,7 @@ import cn from "classnames";
 import HomePage from "./HomePage";
 import Link from "next/link";
 import Upload from "./upload/page";
+import WeightedAveragePage from "./weightedAverage/page";
 
 
 export default function MainContainer({}) {
@@ -27,7 +28,7 @@ export default function MainContainer({}) {
   const resizerStyle: React.CSSProperties = {
     cursor: "ew-resize",
     backgroundColor: "#ffffff",
-    width: "2px",
+    width: "10px",
     marginRight: "5px",
     height: "100%",
   };
@@ -268,6 +269,7 @@ export default function MainContainer({}) {
       <div style={middleColumnStyle}>
         {activeButton === 'home' && <HomePage />}
         {activeButton === 'upload' && <Upload id={inputId} />}
+        {activeButton === 'weightedAverage' && <WeightedAveragePage />}
       </div>
       {/* <div style={rightColumnStyle}></div> */}
     </>

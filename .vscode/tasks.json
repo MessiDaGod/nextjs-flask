@@ -8,12 +8,13 @@
         "option": "watch",
         "problemMatcher": [
           "$tsc-watch"
-        ]
+        ],
+        "dependsOn": "startService"
       },
       {
         "label": "startService",
         "type": "shell",
-        "command": "your-command-to-start-the-service",
+        "command": "./kill_port.sh",
         "isBackground": true,
         "problemMatcher": {
           "owner": "custom",

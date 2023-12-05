@@ -1,1 +1,1 @@
-echo "beautifulsoup4==$(pip show beautifulsoup4 | grep Version | cut -d ' ' -f 2)" >> requirements.txt
+echo "python-dotenv==$(pip show python-dotenv | grep Version | cut -d ' ' -f 2)" >> requirements.txt
