@@ -3,7 +3,10 @@ import React, { useState } from "react";
 import * as pdfjs from "pdfjs-dist/build/pdf";
 pdfjs.GlobalWorkerOptions.workerSrc = `./pdf.worker.js`;
 
-export default function Upload({}) {
+interface Props {
+  id: string;
+}
+export default function Upload({ id }: Props) {
   const [importFile, setImportFile] = useState<File | null>(null);
   const [images, setImages] = useState<string[]>([]);
   const [fileBase64, setFileBase64] = useState<string | null>(null);
@@ -152,7 +155,7 @@ export default function Upload({}) {
     <div>
         <h1>File Upload</h1>
         <form onSubmit={onSubmitJs}>
-          <input type="file" accept=".pdf" onChange={onFileChange} />
+          <input id={id} type="file" accept=".pdf" onChange={onFileChange} />
           <button type="submit" disabled={importFile ? false : true}>
             Convert PDF to Image(s)
           </button>

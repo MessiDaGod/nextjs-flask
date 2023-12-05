@@ -1,12 +1,14 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useId } from "react";
 import Icon from "./Icon";
 import cn from "classnames";
 import HomePage from "./HomePage";
 import Link from "next/link";
 import Upload from "./upload/page";
 
+
 export default function MainContainer({}) {
+  const inputId = useId();
   const [isResizing, setIsResizing] = useState(false);
   const [leftColumnWidth, setLeftColumnWidth] = useState("202px");
   const [activeButton, setActiveButton] = useState("home");
@@ -237,13 +239,37 @@ export default function MainContainer({}) {
             </span>
           </Link>
         </div>
+        <div
+          onClick={() => handleButtonClick("weightedAverage")}
+          style={{ width: "100%", userSelect: "none" }}
+          className={cn(
+            "button ml-6 mb-6",
+            activeButton === "weightedAverage" ? "active" : ""
+          )}
+        >
+          <Link href="/weightedAverage">
+            <Icon symbol="upload" />
+            <span
+              className="button-label"
+              style={{
+                paddingLeft: "20px",
+                display:
+                  parseInt(leftColumnWidth.replace("px", "")) <= 150
+                    ? "none"
+                    : "flex",
+              }}
+            >
+              Weighted Average
+            </span>
+          </Link>
+        </div>
       </div>
       <div style={resizerStyle} onMouseDown={handleMouseDown}></div>
       <div style={middleColumnStyle}>
         {activeButton === 'home' && <HomePage />}
-        {activeButton === 'upload' && <Upload />}
+        {activeButton === 'upload' && <Upload id={inputId} />}
       </div>
-      <div style={rightColumnStyle}></div>
+      {/* <div style={rightColumnStyle}></div> */}
     </>
   );
 }

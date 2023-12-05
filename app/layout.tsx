@@ -2,6 +2,8 @@ import Navbar from "./NavBar";
 import "./globals.css";
 import MainContainer from "./MainContainer";
 import localFont from 'next/font/local'
+import { Metadata } from 'next'
+
 
 const materialSymbols = localFont({
   variable: '--font-family-symbols',
@@ -17,7 +19,7 @@ const containerStyle: React.CSSProperties = {
   height: "calc(100% - 3.5rem)",
 };
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Flask",
   description: "Flask and Nextjs app",
 };

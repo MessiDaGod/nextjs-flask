@@ -1,1 +1,1 @@
-echo "pandas==$(pip show pandas | grep Version | cut -d ' ' -f 2)" >> requirements.txt
+echo "beautifulsoup4==$(pip show beautifulsoup4 | grep Version | cut -d ' ' -f 2)" >> requirements.txt
