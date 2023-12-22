@@ -42,3 +42,16 @@ Received request for /calculate
 CSV data loaded successfully
 Calculations completed
 Error occurred during calculation: Object of type DataFrame is not JSON serializable
+Received request for /calculate
+CSV data loaded successfully
+Calculations completed
+Error occurred during calculation: Object of type Series is not JSON serializable
+Received request for /calculate
+CSV data loaded successfully
+Calculations completed
+Received request for /calculate
+CSV data loaded successfully
+Calculations completed
+Received request for /calculate
+CSV data loaded successfully
+Calculations completed
