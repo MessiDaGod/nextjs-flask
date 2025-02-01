@@ -14,6 +14,7 @@ export default function Upload({ id }: Props) {
 
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
+    // console.log(images)
     if (files && files.length > 0) {
       setImportFile(files[0]);
       console.log(files[0]);
@@ -64,6 +65,57 @@ export default function Upload({ id }: Props) {
       reader.readAsArrayBuffer(file);
     });
   }
+
+  async function onSubmitPython(e: React.FormEvent) {
+    e.preventDefault();
+
+    if (!importFile) {
+      alert("Please select a file before submitting.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", importFile);
+
+    try {
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        console.error("Error from server:", error);
+        alert(`Error: ${error.message}`);
+        return;
+      }
+
+      const data = await response.json();
+      if (data.images) {
+        setImages(data.images);
+        console.log("Received images:", data.images);
+
+        // Optionally render or download the images
+        data.images.forEach((image: string, index: number) => {
+          const img = document.createElement("img");
+          img.src = `data:image/png;base64,${image}`;
+          document.body.appendChild(img);
+
+          const link = document.createElement("a");
+          link.href = `data:image/png;base64,${image}`;
+          link.download = `image_${index + 1}.png`;
+          link.textContent = `Download Image ${index + 1}`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
+      }
+    } catch (error) {
+      console.error("Error calling the API:", error);
+      alert("An error occurred. Please try again.");
+    }
+  }
+
 
   async function onSubmitJs(e: React.FormEvent) {
     e.preventDefault();
