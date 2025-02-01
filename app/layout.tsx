@@ -1,4 +1,5 @@
 import Navbar from "./NavBar";
+import '@/app/styles/index.css'
 import "./globals.css";
 import MainContainer from "./MainContainer";
 import localFont from 'next/font/local'
