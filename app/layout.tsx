@@ -1,10 +1,10 @@
-import Navbar from "./NavBar";
+import TopBar from "./components/TopBar";
 import '@/app/styles/index.css'
 import "./globals.css";
 import MainContainer from "./MainContainer";
 import localFont from 'next/font/local'
 import { Metadata } from 'next'
-
+import {ThemeProvider} from './ThemeContext'
 
 const materialSymbols = localFont({
   variable: '--font-family-symbols',
@@ -33,11 +33,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${materialSymbols.variable}`}>
       <body>
-        <Navbar />
+        <ThemeProvider>
+        <TopBar />
         <div style={containerStyle}>
           <MainContainer />
           {children}
         </div>
+        </ThemeProvider>
       </body>
     </html>
   );

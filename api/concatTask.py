@@ -41,4 +41,3 @@ concatenated_file_path = '/mnt/data/VicAI_Script_Details_Concatenated.xlsx'
 df_concatenated.to_excel(concatenated_file_path, index=False)
 
 concatenated_file_path
-

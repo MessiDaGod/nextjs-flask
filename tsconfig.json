@@ -19,11 +19,23 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@/*": [
+        "./*",
+        "./app/*",
+        "./utils/*",
+        "./pages/*"
+      ],
+      "app/hooks": [
+        "app/hooks"
+      ],
+      "lib/*": [
+        "./lib/*"
+      ]
+    },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", ".next"],
   "typeRoots": ["./types", "./node_modules/@types"],
 }
